@@ -4,8 +4,7 @@ angular.module('linkerApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute',
-  "leaflet-directive"
+  'ngRoute'
 ])
   .config(function ($routeProvider) {
     $routeProvider
