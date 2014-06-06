@@ -1,6 +1,6 @@
 ## Getting started
 ### Setup
-    git clone git@github.com:NAzT/sails-angular-seed.git your_project
+    git clone git@github.com:NAzT/sails-0.10-yeoman-angular-seed.git your_project
     cd your_project
     npm install
     bower install
