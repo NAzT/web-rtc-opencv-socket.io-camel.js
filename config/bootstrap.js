@@ -9,6 +9,7 @@
  */
 
 module.exports.bootstrap = function (cb) {
+	sails.cv = require('opencv');
 	// var serialport = require("serialport")
 	// var SerialPort = serialport.SerialPort;
 	// var serialPort = new SerialPort("/dev/tty.CMMC-3D-PRINTER-DevB", {
@@ -21,5 +22,10 @@ module.exports.bootstrap = function (cb) {
 
   // It's very important to trigger this callack method when you are finished 
   // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
+
+  // sails.io.sockets.on('frame', function(res) {
+  // 	console.log("onFrame", res);
+  // })
+
   cb();
 };

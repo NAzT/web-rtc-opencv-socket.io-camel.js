@@ -23,6 +23,62 @@ module.exports.sockets = {
 
 
     console.log("socketId", socketId, "enter");
+
+    socket.on('frame', function(data) {
+      var orig = data;
+      console.log(data.length);
+      //chrome 2459
+      // firefore 2727
+      if (!data || data.length < 5000) { 
+        return ; 
+      }
+
+      data = data.split(',')[1]
+      var frame_data = new Buffer(data, 'base64');
+
+      var cv = sails.cv;
+      console.log(socketId + " SOCKET.. onFrame config......");
+
+      cv.readImage(frame_data, function(err, im) {
+        var img_gray = im.copy();
+        var img_hsv = im.copy();
+        im.detectObject(cv.FACE_CASCADE, {}, function(err, faces){
+
+          if (!faces){
+            console.log("No Faces")
+            return;
+          }
+          var face = faces[0] || {}
+            , ims = im.size()
+
+
+          console.log(face);
+
+          var im2 = im.roi(face.x, face.y, face.width, face.height)
+          
+          im.adjustROI(
+               -face.y
+             , (face.y + face.height) - ims[0]
+             , -face.x
+             , (face.x + face.width) - ims[1])
+             
+          // var img_hsv.convertHSVscale();
+          img_gray.convertGrayscale();
+          img_hsv.convertHSVscale();
+
+          socket.emit('face_data', { 
+            image_gray: img_gray.toBuffer().toString('base64'), 
+            image_hsv: img_hsv.toBuffer().toString('base64'),
+            image: orig
+          })
+
+          // console.log(im.toBuffer());
+          // console.log(im.toBuffer());
+          im2.save('out.jpg')
+        })
+      });
+    });
+
     User.create({name: 'unknown', socketId: socketId}).exec(function(err, user) {
 
 
@@ -72,7 +128,6 @@ module.exports.sockets = {
     var numberOfSockets = Object.keys(socket.namespace.manager.sockets.sockets).length
     
     socket.emit('connectedUsers', { count: numberOfSockets });
-    socket.broadcast.emit('connectedUsers', { count: numberOfSockets });
 
     if (session.users) {
       console.log("CURRENT SESSION", Object.prototype.toString(session.users));
