@@ -28,21 +28,26 @@
             + Use a different or additional preprocessor, like SASS, SCSS or Stylus
     -->
 
+    <!-- Bootstrap -->
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+    <!-- Bootflat's JS files.-->
+    <script src="https://bootflat.github.io/bootflat/js/icheck.min.js"></script>
+    <script src="https://bootflat.github.io/bootflat/js/jquery.fs.selecter.min.js"></script>
+    <script src="https://bootflat.github.io/bootflat/js/jquery.fs.stepper.min.js"></script> 
+
     <!--STYLES-->
-    <link rel="stylesheet" href="/linker/bower_components/leaflet-dist/leaflet.css">
-    <link rel="stylesheet" href="/styles/application.css">
-    <link rel="stylesheet" href="/styles/bootstrap-combined.min.css">
-    <link rel="stylesheet" href="/styles/bootstrap-responsive.min.css">
-    <link rel="stylesheet" href="/styles/importer.css">
+    <link rel="stylesheet" href="/styles/first-men/nat.css">
+    <link rel="stylesheet" href="/linker/bower_components/Bootflat/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/linker/bower_components/Bootflat/bootflat/css/bootflat.css">
+    <link rel="stylesheet" href="/linker/bower_components/Bootflat/css/site.css">
     <!--STYLES END-->
    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css"> 
   </head>
 
   <body ng-app="linkerApp">
-    <%- include header %>
-    <%- body %>
-
-
+    <%- body %> 
 
     <!--
         Client-side Templates
@@ -99,8 +104,6 @@
     <script src="/linker/bower_components/angular-route/angular-route.js"></script>
     <script src="/linker/bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="/linker/bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="/linker/bower_components/leaflet-dist/leaflet.js"></script>
-    <script src="/linker/bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"></script>
     <script src="/linker/app/scripts/app.js"></script>
     <script src="/linker/app/scripts/controllers/main.js"></script>
     <script src="/linker/app/scripts/directives/mydirective.js"></script>

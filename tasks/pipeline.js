@@ -15,8 +15,13 @@
 // (if you're using LESS with the built-in default config, you'll want
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
-  'linker/bower_components/leaflet-dist/leaflet.css',
-  'styles/**/*.css'
+  'styles/first-men/**/*.css',
+  //'linker/bower_components/leaflet-dist/leaflet.css',
+  'linker/bower_components/Bootflat/css/bootstrap.min.css',
+  'linker/bower_components/Bootflat/bootflat/css/bootflat.css',
+  'linker/bower_components/Bootflat/css/site.css'
+   // 'linker/bower_components/Bootflat/**/*.css',
+  // 'linker/bower_components/Bootflat/bootflat/css/bootflat.min.css'
 ];
 
 
@@ -30,8 +35,8 @@ var jsFilesToInject = [
   'linker/bower_components/angular-mocks/angular-mocks.js',
   'linker/bower_components/angular-sanitize/angular-sanitize.js',
   'linker/bower_components/angular-scenario/angular-scenario.js',
-  'linker/bower_components/leaflet-dist/leaflet.js',
-  'linker/bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js',
+  // 'linker/bower_components/leaflet-dist/leaflet.js',
+  // 'linker/bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js',
   'linker/app/**/*.js',
   // Below, as a demonstration, you'll see the built-in dependencies
   // linked in the proper order order
