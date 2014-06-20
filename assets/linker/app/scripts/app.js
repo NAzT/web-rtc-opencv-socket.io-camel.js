@@ -13,6 +13,14 @@ angular.module('linkerApp', [
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
+      .when('/about', {
+        templateUrl: 'views/about.html',
+        controller: 'AboutCtrl'
+      })
+      .when('/camera', {
+        templateUrl: 'views/camera.html',
+        controller: 'CameraCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
