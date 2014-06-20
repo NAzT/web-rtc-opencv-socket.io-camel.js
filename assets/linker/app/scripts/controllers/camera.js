@@ -27,7 +27,7 @@ angular.module('linkerApp')
       var processed_ctx = processed_canvas.getContext('2d');
 
       $scope['frame'] = 0;
-      $scope.fps = 7;
+      $scope.fps = 30;
 
       var flip_obj = {
         success: 'warning',

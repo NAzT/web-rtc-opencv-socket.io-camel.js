@@ -11,17 +11,41 @@
                 <button type="button" class="btn btn-{{processStatus}}" ng-click="process()">Process</button>
               </p>
               <p>
-                <image src="{{src_face}}" ng-show="src_face" style="display: inline;" />
+                <image src="{{src_face}}" ng-show="src_face" style="display: inline;" width="50px" height="50px"  />
               </p>
-              <div>
-                    <video id="live" width="320" height="240" autoplay style="display: inline;"></video>
-                    <canvas width="320" id="canvas" height="240" style="display: inline;"></canvas>
-                    <canvas width="320" id="processed_canvas" height="240" style="display: inline;"></canvas>
-                    <image src="{{src_orig}}"  ng-show="src_orig"  style="display: inline;" />
-                    <image src="{{src_gray}}"  ng-show="src_gray"  style="display: inline;" />
-                    <image src="{{src_hsv}}" ng-show="src_hsv" style="display: inline;" />
-              </div>
-          </div>
+
+                <div class="row">
+                    <div class="col-md-4">                      
+                        <p class="text-center">Original Image</p>
+                        <image src="{{src_orig}}"  ng-show="src_orig"  style="display: inline;" />
+                    </div>
+                    <div class="col-md-4">                    
+                        <p class="text-center">Gray Image</p>
+                        <image src="{{src_gray}}"  ng-show="src_gray"  style="display: inline;" />
+                    </div>
+                    <div class="col-md-4">                      
+                        <p class="text-center">HSV Image</p>
+                        <image src="{{src_hsv}}" ng-show="src_hsv" style="display: inline;" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <p class="text-center">video tag</p>
+                        <video id="live" width="320" height="240" autoplay style="display: inline;"></video>
+                    </div>
+
+                    <div class="col-md-4">                      
+                        <p class="text-center">canvas</p>
+                        <canvas width="320" id="canvas" height="240" style="display: inline;"></canvas>
+                    </div>
+
+                    <div class="col-md-4">
+                        <p class="text-center">Caman canvas!</p>
+                        <canvas width="320" id="processed_canvas" height="240" style="display: inline;"></canvas>
+                    </div>
+                </div>
+            </div>
         </div>
       </div>
     </div>
