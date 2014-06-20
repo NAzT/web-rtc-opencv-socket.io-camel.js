@@ -6,28 +6,28 @@
           <div class="jumbotron-contents">
               <h1 class="text-center"> Streaming image from the server... </h1>
               <hr />
-              <div class="row">
-                <div class="col-md-4">
-                    <p class="text-center">Gray Image (opencv)</p>
-                    <image src="{{src_gray}}"  ng-show="src_gray"  style="display: inline;" />
-                </div>
-                <div class="col-md-4">
-                    <p class="text-center">Original Image (nodejs)</p>
-                    <image src="{{src_orig}}"  ng-show="src_orig"  style="display: inline;" />
-                </div>
-                <div class="col-md-4">
-                    <p class="text-center">HSV Image (opencv)</p>
-                    <image src="{{src_hsv}}" ng-show="src_hsv" style="display: inline;" />
-                </div>
-              </div>
-             <hr /> 
-              <div class="row">
+              <div class="row"> 
                 <div class="text-center">
                   <p>Face!</p>
-                  <image src="{{src_face}}" ng-show="src_face" style="display: inline;" width="50px" height="50px" />
+                  <image src="{{src_face}}" ng-show="src_face" width="50px" height="50px" />
                 </div>
               </div>
 
+              <hr />
+              <div class="row">
+                <div class="col-md-4">
+                    <p class="text-center">Gray Image (opencv)</p>
+                    <image src="{{src_gray}}"  ng-show="src_gray"  />
+                </div>
+                <div class="col-md-4">
+                    <p class="text-center">Original Image (nodejs)</p>
+                    <image src="{{src_orig}}"  ng-show="src_orig"  />
+                </div>
+                <div class="col-md-4">
+                    <p class="text-center">HSV Image (opencv)</p>
+                    <image src="{{src_hsv}}" ng-show="src_hsv" />
+                </div>
+              </div>
           </div>
         </div>
       </div>

@@ -10,39 +10,42 @@
                 <button type="button" class="btn btn-{{captureStatus}}" ng-click="capture()">Capture</button> 
                 <button type="button" class="btn btn-{{processStatus}}" ng-click="process()">Process</button>
               </p>
-              <p>
-                <image src="{{src_face}}" ng-show="src_face" style="display: inline;" width="50px" height="50px"  />
-              </p>
+              <div class="text-center">
+                <p class="text-center">Face!</p>
+                <image src="{{src_face}}" ng-show="src_face" width="50px" height="50px"  />
+              </div>
+
+              <hr />
 
                 <div class="row">
                     <div class="col-md-4">                      
                         <p class="text-center">Original Image</p>
-                        <image src="{{src_orig}}"  ng-show="src_orig"  style="display: inline;" />
+                        <image src="{{src_orig}}"  ng-show="src_orig"  />
                     </div>
                     <div class="col-md-4">                    
                         <p class="text-center">Gray Image</p>
-                        <image src="{{src_gray}}"  ng-show="src_gray"  style="display: inline;" />
+                        <image src="{{src_gray}}"  ng-show="src_gray"  />
                     </div>
                     <div class="col-md-4">                      
                         <p class="text-center">HSV Image</p>
-                        <image src="{{src_hsv}}" ng-show="src_hsv" style="display: inline;" />
+                        <image src="{{src_hsv}}" ng-show="src_hsv" />
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-4">
                         <p class="text-center">video tag</p>
-                        <video id="live" width="320" height="240" autoplay style="display: inline;"></video>
+                        <video id="live" width="320" height="240" autoplay></video>
                     </div>
 
                     <div class="col-md-4">                      
                         <p class="text-center">canvas</p>
-                        <canvas width="320" id="canvas" height="240" style="display: inline;"></canvas>
+                        <canvas width="320" id="canvas" height="240"></canvas>
                     </div>
 
                     <div class="col-md-4">
                         <p class="text-center">Caman canvas!</p>
-                        <canvas width="320" id="processed_canvas" height="240" style="display: inline;"></canvas>
+                        <canvas width="320" id="processed_canvas" height="240"></canvas>
                     </div>
                 </div>
             </div>
