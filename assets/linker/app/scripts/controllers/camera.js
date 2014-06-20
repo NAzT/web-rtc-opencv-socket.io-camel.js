@@ -18,6 +18,7 @@ angular.module('linkerApp')
 
     $scope.processStatus = 'success';
 
+
     $scope.$on('$viewContentLoaded', function() {
       var video = angular.element('#live')[0];
       var canvas = angular.element('#canvas')[0];
@@ -58,9 +59,6 @@ angular.module('linkerApp')
         console.log("Unable to get video stream!")
       }
 
-      navigator.getMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
-      navigator.getMedia({ video: true, audio: false }, streaming_callback, error_callback);
-
       var timer_callback = function() {
         ctx.drawImage(video, 0, 0, 320, 240);
 
@@ -87,7 +85,10 @@ angular.module('linkerApp')
         $scope.$apply();
 
       }
-
+      $scope.capture = function() {
+        navigator.getMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
+        navigator.getMedia({ video: true, audio: false }, streaming_callback, error_callback);
+      }
       $scope.timer = setInterval(timer_callback, 1000/$scope.fps);
 
   });

@@ -4,12 +4,6 @@
       <div class="col-md-12">
         <div class="jumbotron">
           <div class="jumbotron-contents">
-              <p>FPS: <input type="number" name="input" ng-model="fps" min="1" max="99" > </p>
-              <p>Frame: {{frame}}</p>
-              <p> 
-                <button type="button" class="btn btn-{{captureStatus}}" ng-click="capture()">Capture</button> 
-                <button type="button" class="btn btn-{{processStatus}}" ng-click="process()">Process</button>
-              </p>
               <p>
                 <image src="{{src_face}}" ng-show="src_face" style="display: inline;" width="100px" height="100px" />
               </p>
