@@ -42,17 +42,14 @@ module.exports.sockets = {
       cv.readImage(frame_data, function(err, im) {
         var img_gray = im.copy();
         var img_hsv = im.copy();
-        im.detectObject(cv.FACE_CASCADE, {}, function(err, faces){
 
+        im.detectObject(cv.FACE_CASCADE, {}, function(err, faces){
           if (!faces){
             console.log("No Faces")
             return;
           }
           var face = faces[0] || {}
             , ims = im.size()
-
-
-          console.log(face);
 
           var im2 = im.roi(face.x, face.y, face.width, face.height)
           
@@ -62,13 +59,20 @@ module.exports.sockets = {
              , -face.x
              , (face.x + face.width) - ims[1])
              
-          // var img_hsv.convertHSVscale();
           img_gray.convertGrayscale();
           img_hsv.convertHSVscale();
 
           socket.emit('face_data', { 
             image_gray: img_gray.toBuffer().toString('base64'), 
             image_hsv: img_hsv.toBuffer().toString('base64'),
+            image_face: im.toBuffer().toString('base64'),
+            image_orig: orig_base64 
+          })
+
+          socket.broadcast.emit('face_data', { 
+            image_gray: img_gray.toBuffer().toString('base64'), 
+            image_hsv: img_hsv.toBuffer().toString('base64'),
+            image_face: im.toBuffer().toString('base64'),
             image_orig: orig_base64 
           })
 
@@ -128,6 +132,7 @@ module.exports.sockets = {
     var numberOfSockets = Object.keys(socket.namespace.manager.sockets.sockets).length
     
     socket.emit('connectedUsers', { count: numberOfSockets });
+    socket.broadcast.emit('connectedUsers', { count: numberOfSockets });
 
     if (session.users) {
       console.log("CURRENT SESSION", Object.prototype.toString(session.users));
@@ -280,7 +285,7 @@ module.exports.sockets = {
 
   // Used by the HTTP transports. The Socket.IO server buffers HTTP request bodies up to this limit. 
   // This limit is not applied to websocket or flashsockets.
-  'destroy buffer size': '10E7',
+  'destroy buffer size': Infinity,
 
   // Do we need to destroy non-socket.io upgrade requests?
   'destroy upgrade': true,

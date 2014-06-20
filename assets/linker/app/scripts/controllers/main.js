@@ -19,7 +19,7 @@ angular.module('linkerApp')
       var processed_ctx = processed_canvas.getContext('2d');
 
       $scope['frame'] = 0;
-      $scope.fps = 1;
+      $scope.fps = 7;
 
       var flip_obj = {
         success: 'warning',
@@ -28,12 +28,13 @@ angular.module('linkerApp')
 
       $scope.$watch('fps', function(newValue, oldValue) {
         clearInterval($scope.timer);
-         $scope.timer = setInterval(timer_callback, 1000/newValue);
+        $scope.timer = setInterval(timer_callback, 1000/newValue);
       });
 
       $socket.on('face_data', function(d) {
         $scope.src_gray = 'data:image/jpeg;base64,'+d.image_gray;
         $scope.src_hsv = 'data:image/jpeg;base64,'+d.image_hsv;
+        $scope.src_face = 'data:image/jpeg;base64,'+d.image_face;
         $scope.src_orig = d.image_orig;
       })
    
@@ -58,19 +59,18 @@ angular.module('linkerApp')
 
         if ($scope.captureStatus == 'warning') {
           var imageData = ctx.getImageData(0, 0, 320, 240);
-          processed_ctx.putImageData(imageData, 0, 0)
+          processed_ctx.putImageData(imageData, 0, 0);
           $scope.captureStatus = 'success';
 
           Caman(processed_canvas,  function () {
-            this.brightness(10);
-            this.contrast(30);
-            this.sepia(60);
-            this.saturation(-30);
-            this.render(function(r) {
-              console.log(arguments);
-            });
-            // $scope.src_caman = this.toBase64();
-            // $scope.$apply();
+            this.revert(true);
+            this.brightness(15);
+            this.exposure(15);
+            this.curves("rgb", [0, 0], [200, 0], [155, 255], [255, 255]);
+            this.saturation(-20);
+            this.gamma(1.8);
+            this.vignette("10%", 40);
+            this.render(function(r) {});
           }); 
         }
 
@@ -78,8 +78,7 @@ angular.module('linkerApp')
         $scope.image_data = canvas.toDataURL('image/jpeg');
         $socket.emit('frame', $scope.image_data);
         $scope.$apply();
-        // var data = canvas.get()[0].toDataURL('image/jpeg', 1.0);
-        // newblob = dataURItoBlob(data);
+
       }
 
       $scope.timer = setInterval(timer_callback, 1000/$scope.fps);
