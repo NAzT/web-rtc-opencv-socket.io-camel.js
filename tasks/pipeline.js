@@ -20,6 +20,7 @@ var cssFilesToInject = [
   'linker/bower_components/Bootflat/css/bootstrap.min.css',
   'linker/bower_components/Bootflat/bootflat/css/bootflat.css',
   'linker/bower_components/Bootflat/css/site.css'
+
    // 'linker/bower_components/Bootflat/**/*.css',
   // 'linker/bower_components/Bootflat/bootflat/css/bootflat.min.css'
 ];
@@ -36,6 +37,10 @@ var jsFilesToInject = [
   'linker/bower_components/angular-mocks/angular-mocks.js',
   'linker/bower_components/angular-sanitize/angular-sanitize.js',
   'linker/bower_components/angular-scenario/angular-scenario.js',
+  'linker/bower_components/vintagejs/dist/angular.vintage.js',
+  'linker/bower_components/caman/dist/caman.full.js',
+  'linker/bower_components/vintagejs/dist/vintage.js',
+  'linker/bower_components/glfx-bower/glfx.js',
   // 'linker/bower_components/leaflet-dist/leaflet.js',
   // 'linker/bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js',
   'linker/app/**/*.js',

@@ -4,7 +4,8 @@ angular.module('linkerApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute'
+  'ngRoute',
+  'vintagejs'
 ])
   .config(function ($routeProvider) {
     $routeProvider

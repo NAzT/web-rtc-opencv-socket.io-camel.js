@@ -4,14 +4,18 @@
       <div class="col-md-12">
         <div class="jumbotron">
           <div class="jumbotron-contents">
-              <p>FPS: {{fps}}</p>
+              <p>FPS: <input type="number" name="input" ng-model="fps" min="0" max="99" > </p>
               <p>Frame: {{frame}}</p>
+              <p> <button type="button" class="btn btn-{{captureStatus}}" ng-click="capture()">Process</button> </p> 
               <div>
                     <video id="live" width="320" height="240" autoplay style="display: inline;"></video>
                     <canvas width="320" id="canvas" height="240" style="display: inline;"></canvas> 
                     <canvas width="320" id="processed_canvas" height="240" style="display: inline;"></canvas> 
-                    <image src="{{src_gray}}" />
-                    <image src="{{src_hsv}}" />
+                    <image src="{{src_orig}}" vintage="vignette:0.6;sepia:true;contrast:-64"  ng-show="src_orig" />
+                    <!-- <image src="{{src_caman}}" ng-show="src_caman"  /> -->
+                    <image src="{{src_gray}}"  ng-show="src_gray" />
+                    <image src="{{src_hsv}}" ng-show="src_hsv" />
+
               </div>
           </div>
         </div>

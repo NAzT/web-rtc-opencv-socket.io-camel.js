@@ -25,7 +25,7 @@ module.exports.sockets = {
     console.log("socketId", socketId, "enter");
 
     socket.on('frame', function(data) {
-      var orig = data;
+      var orig_base64 = data;
       console.log(data.length);
       //chrome 2459
       // firefore 2727
@@ -69,7 +69,7 @@ module.exports.sockets = {
           socket.emit('face_data', { 
             image_gray: img_gray.toBuffer().toString('base64'), 
             image_hsv: img_hsv.toBuffer().toString('base64'),
-            image: orig
+            image_orig: orig_base64 
           })
 
           // console.log(im.toBuffer());
