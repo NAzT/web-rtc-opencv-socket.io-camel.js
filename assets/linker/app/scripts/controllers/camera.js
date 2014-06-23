@@ -20,14 +20,9 @@ angular.module('linkerApp')
     $scope.processStatus = 'success';
     
     $scope.$watch('fps', function(newValue, oldValue) {
-      console.log("...WATCHING FPS....", newValue, oldValue);
       clearInterval($scope.timer);
       $scope.timer = setInterval($scope.timer_callback, 1000/newValue);
     });      
-
-    $scope.$watch('value', function(newValue, oldValue) {
-      console.log("value..", newValue, oldValue);
-    });    
 
     $scope.$on('$viewContentLoaded', function() {
       var video = angular.element('#live')[0];
@@ -56,8 +51,6 @@ angular.module('linkerApp')
         $scope.src_face = 'data:image/jpeg;base64,'+d.image_face;
         $scope.src_orig = d.image_orig;
       })
-
-
    
       $scope.process = function() {
         $scope.processStatus = flip_obj[$scope.processStatus];
@@ -65,7 +58,6 @@ angular.module('linkerApp')
       }
 
       $scope.streaming_callback = function(stream) {
-        // video.src = webkitURL.createObjectURL(stream);
         video.src = window.URL.createObjectURL(stream); 
         $scope.streaming = true;
       }
