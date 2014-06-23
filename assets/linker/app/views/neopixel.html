@@ -7,32 +7,32 @@
           <div class="jumbotron-contents">
 
               <h1 class="text-center"> Choose your favourite color </h1>
-              <p class='lead text-center'>lllllllllllllllllllllllllllllllllllllll</p>
+              <!-- <p class='lead text-center'>lllllllllllllllllllllllllllllllllllllll</p> -->
 
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">                      
-		                <button type="button" class="btn btn-lg btn-block btn-default" ng-click="connect()"> {{ status }} </button>
+		                <button type="button" class="btn btn-lg btn-block btn-{{ getStatusCls() }}" ng-click="connect()"> {{ button_status }} </button>
 	                </div>
                 </div>
                 <hr />
                 <div class="row">
                     <div class="col-md-3">                      
-		                <button type="button" class="btn btn-lg btn-block btn-primary {{ disabled }}" ng-click="capture()">Blue</button>
+		                <button type="button" class="btn btn-lg btn-block btn-primary" ng-disabled="isDisabled()" ng-click="write('b')">Blue</button>
                     </div>
                     <div class="col-md-3">                    
-		                <button type="button" class="btn btn-lg btn-block btn-success {{ disabled }}" ng-click="capture()">Green</button> 
+		                <button type="button" class="btn btn-lg btn-block btn-success" ng-disabled="isDisabled()" ng-click="write('g')">Green</button> 
 	                </div>
                     <div class="col-md-3">
-		                <button type="button" class="btn btn-lg btn-block btn-warning {{ disabled }}" ng-click="capture()">Orange</button> 
+		                <button type="button" class="btn btn-lg btn-block btn-warning" ng-disabled="isDisabled()" ng-click="write('o')">Orange</button> 
                     </div>
                     <div class="col-md-3">
-		                <button type="button" class="btn btn-lg btn-block btn-danger {{ disabled }}" ng-click="capture()">Red</button> 
+		                <button type="button" class="btn btn-lg btn-block btn-danger" ng-disabled="isDisabled()" ng-click="write('r')">Red</button> 
                     </div>
                 </div>
                 <hr />
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">                      
-		                <button type="button" class="btn btn-lg btn-block btn-default" ng-click="connect()"> Light Off </button>
+		                <button type="button" class="btn btn-lg btn-block btn-default" ng-click="write('z')"> Light Off </button>
 	                </div>
                 </div>
 

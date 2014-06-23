@@ -18,18 +18,50 @@
 module.exports = {
     
     connect: function(req, res) {
-    	sails.serial_connected = true;
-        var socketId = sails.sockets.id(req.socket);
+      var socketId = sails.sockets.id(req.socket);
 
+      if (!sails.serial_connected) {
+        sails.sp.open(function() {
+          console.log(" CONTROLLER OPEN ")
 
+          sails.sp.flush(function(err, resp) {
+            if (!err) {
+              sails.serial_connected = true;
+            }
+            res.json({ err: err, resp: resp})
+          });
 
+        })
+      }
+      else {
+        res.json({ err: 'already connected'})
+      }
     },
 
     close: function(req, res) {
-    	sails.serialport.close(function(r) {
-    		console.log(r);
-    	})
+    	if (sails.serial_connected) {
+	    	sails.serialport.close(function(r) {
+	    		console.log(r);
+	    	})
+    	}
     },
+
+    write: function(req, res) {
+      console.log(req.params);
+      if (sails.serial_connected) {
+        sails.sp.write('g', function(err, results) {
+          console.log('err ' + err);
+          console.log('results ' + results);
+          res.json({err: err, results: results})
+
+        });
+      }
+      else {
+        res.json({ err: "not connected."})
+      }
+
+    },
+
 
 
 

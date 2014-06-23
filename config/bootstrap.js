@@ -19,23 +19,20 @@ module.exports.bootstrap = function (cb) {
         stopBits: 1,
         flowControl : false,
 	      parser: serialport.parsers.readline("\r\n") 
-	 }, true);
+	 }, false);
 
 	// sails.serialPort = serialPort;
   sp.on('open', function() {
+    console.log("OPEN IN BOOTSTRAP")
 
     sp.on('data', function(data) {
       console.log('data received: ' + data);
     });
 
-    sp.write('g', function(err, results) {
-
-      console.log('err ' + err);
-      console.log('results ' + results);
-
-    });
 
   });
+
+  sails.sp = sp;
   // It's very important to trigger this callack method when you are finished 
   // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
 
