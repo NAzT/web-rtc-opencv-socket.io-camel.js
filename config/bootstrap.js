@@ -10,16 +10,32 @@
 
 module.exports.bootstrap = function (cb) {
 	sails.cv = require('opencv');
-	 var serialport = require("serialport")
-	 var SerialPort = serialport.SerialPort;
-	 var serialPort = new SerialPort("/dev/tty.CMMC-3D-PRINTER-DevB", {
-	      baudrate: 115200,
+  var serialport = require("serialport")
+  var SerialPort = serialport.SerialPort;
+  var sp = new SerialPort("/dev/tty.usbserial-A9A9XBJB", {
+        baudRate : 9600,
+        dataBits : 8,
+        parity : 'none',
+        stopBits: 1,
+        flowControl : false,
 	      parser: serialport.parsers.readline("\r\n") 
 	 }, true);
 
 	// sails.serialPort = serialPort;
+  sp.on('open', function() {
 
+    sp.on('data', function(data) {
+      console.log('data received: ' + data);
+    });
 
+    sp.write('g', function(err, results) {
+
+      console.log('err ' + err);
+      console.log('results ' + results);
+
+    });
+
+  });
   // It's very important to trigger this callack method when you are finished 
   // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
 
