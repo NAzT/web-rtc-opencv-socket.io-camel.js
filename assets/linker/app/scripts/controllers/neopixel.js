@@ -9,9 +9,8 @@
  */
 angular.module('linkerApp')
   .controller('NeopixelCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  		var word = { waiting: 'Connect', connect: 'Disconnect'}
+
+  		$scope.disabled = "disabled";
+  		$scope.status = word["waiting"];
   });

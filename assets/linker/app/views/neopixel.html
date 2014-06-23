@@ -1,18 +1,44 @@
-<p>This is the neopixel view.</p>
-<p>This is the neopixel view.</p>
-<p>This is the neopixel view.</p>
-<p>This is the neopixel view.</p>
-<p>This is the neopixel view.</p>
-<p>This is the neopixel view.</p>
-<p>This is the neopixel view.</p>
-<p>This is the neopixel view.</p>
-<p>This is the neopixel view.</p>
-<p>This is the neopixel view.</p>
-<p>This is the neopixel view.</p>
-<p>This is the neopixel view.</p>
-<p>This is the neopixel view.</p>
-<p>This is the neopixel view.</p>
-<p>This is the neopixel view.</p>
-<p>This is the neopixel view.</p>
-<p>This is the neopixel view.</p>
-<p>This is the neopixel view.</p>
+
+<div class="example" ng-controller="NeopixelCtrl">
+    <h2 class="example-title">Jumbotron</h2>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="jumbotron">
+          <div class="jumbotron-contents">
+
+              <h1 class="text-center"> Choose your favourite color </h1>
+              <p class='lead text-center'>lllllllllllllllllllllllllllllllllllllll</p>
+
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">                      
+		                <button type="button" class="btn btn-lg btn-block btn-default" ng-click="connect()"> {{ status }} </button>
+	                </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-md-3">                      
+		                <button type="button" class="btn btn-lg btn-block btn-primary {{ disabled }}" ng-click="capture()">Blue</button>
+                    </div>
+                    <div class="col-md-3">                    
+		                <button type="button" class="btn btn-lg btn-block btn-success {{ disabled }}" ng-click="capture()">Green</button> 
+	                </div>
+                    <div class="col-md-3">
+		                <button type="button" class="btn btn-lg btn-block btn-warning {{ disabled }}" ng-click="capture()">Orange</button> 
+                    </div>
+                    <div class="col-md-3">
+		                <button type="button" class="btn btn-lg btn-block btn-danger {{ disabled }}" ng-click="capture()">Red</button> 
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">                      
+		                <button type="button" class="btn btn-lg btn-block btn-default" ng-click="connect()"> Light Off </button>
+	                </div>
+                </div>
+
+
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
