@@ -24,6 +24,11 @@ module.exports.sockets = {
 
     console.log("socketId", socketId, "enter");
 
+    // (B)lue, (G)reen, (R)ed
+    // var lower_threshold = [46, 57, 83];
+    // var upper_threshold = [80, 96, 115];
+     
+
     socket.on('frame', function(data) {
       var orig_base64 = data;
       console.log(data.length);
@@ -33,6 +38,7 @@ module.exports.sockets = {
         return ; 
       }
 
+      // 'data:image/jpeg;base64,'
       data = data.split(',')[1]
       var frame_data = new Buffer(data, 'base64');
 
@@ -42,6 +48,7 @@ module.exports.sockets = {
       cv.readImage(frame_data, function(err, im) {
         var img_gray = im.copy();
         var img_hsv = im.copy();
+        var filter_image = im.copy();
 
         im.detectObject(cv.FACE_CASCADE, {}, function(err, faces){
           if (!faces){

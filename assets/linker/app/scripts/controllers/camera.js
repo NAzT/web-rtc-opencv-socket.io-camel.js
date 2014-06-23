@@ -41,10 +41,6 @@ angular.module('linkerApp')
         warning: 'success'
       }
 
-      $scope.change_fps = function() {
-        console.log("HELLO", $scope.fps);
-      }
-
       $socket.on('face_data', function(d) {
         $scope.src_gray = 'data:image/jpeg;base64,'+d.image_gray;
         $scope.src_hsv = 'data:image/jpeg;base64,'+d.image_hsv;

@@ -25,27 +25,27 @@
               </div>
                 <div class="row" ng-show="streaming">
                     <div class="col-md-4">                      
-                        <p class="text-center">Original Image</p>
+                        <p class="text-center">Original Image (processed from opencv)</p>
                         <image src="{{src_orig}}"  ng-show="src_orig"  />
                     </div>
                     <div class="col-md-4">                    
-                        <p class="text-center">Gray Image</p>
+                        <p class="text-center">Gray Image (processed from opencv)</p>
                         <image src="{{src_gray}}"  ng-show="src_gray"  />
                     </div>
                     <div class="col-md-4">                      
-                        <p class="text-center">HSV Image</p>
+                        <p class="text-center">HSV Image (processed from opencv)</p>
                         <image src="{{src_hsv}}" ng-show="src_hsv" />
                     </div>
                 </div>
 
                 <div class="row" ng-show="streaming">
                     <div class="col-md-4">
-                        <p class="text-center">video tag</p>
+                        <p class="text-center">VIDEO TAG</p>
                         <video id="live" width="320" height="240" autoplay></video>
                     </div>
 
                     <div class="col-md-4">                      
-                        <p class="text-center">canvas</p>
+                        <p class="text-center">CANVAS TAG</p>
                         <canvas width="320" id="canvas" height="240"></canvas>
                     </div>
 

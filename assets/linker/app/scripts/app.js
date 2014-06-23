@@ -21,6 +21,10 @@ angular.module('linkerApp', [
         templateUrl: 'views/camera.html',
         controller: 'CameraCtrl'
       })
+      .when('/neopixel', {
+        templateUrl: 'views/neopixel.html',
+        controller: 'NeopixelCtrl'
+      })
       .otherwise({
         redirectTo: '/home'
       });
