@@ -6,20 +6,27 @@
           <div class="jumbotron-contents">
               <h1 class="text-center"> Calling WebRTC... </h1>
               <hr />
-              <p>FPS: <input type="number" name="input" ng-model="fps" min="1" max="99" > </p>
-              <p>Frame: {{frame}}</p>
+              <p>
+                FPS: <input type="number" name="input" ng-model="fps" min="1" max="99" > 
+                <input type="number" name="input" ng-model="value"
+                 min="0" max="99" required>
+                 
+                <button type="button" class="btn btn-{{processStatus}}" ng-click="change_fps()">Update</button>
+              </p>
+              <p ng-show="capture_num > 0">Frame: {{frame}}</p>
               <p> 
                 <button type="button" class="btn btn-{{captureStatus}}" ng-click="capture()">Capture</button> 
                 <button type="button" class="btn btn-{{processStatus}}" ng-click="process()">Process</button>
               </p>
-              <div class="text-center">
-                <p class="text-center">Face!</p>
-                <image src="{{src_face}}" ng-show="src_face" width="50px" height="50px"  />
+
+              <div class="row" ng-show="capture_num > 0">
+                <div class="text-center">
+                  <p class="text-center">Face!</p>
+                  <image src="{{src_face}}" ng-show="src_face" width="50px" height="50px"  />
+                </div>
+                <hr />
               </div>
-
-              <hr />
-
-                <div class="row">
+                <div class="row" ng-show="capture_num > 0">
                     <div class="col-md-4">                      
                         <p class="text-center">Original Image</p>
                         <image src="{{src_orig}}"  ng-show="src_orig"  />
@@ -34,7 +41,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row" ng-show="capture_num > 0">
                     <div class="col-md-4">
                         <p class="text-center">video tag</p>
                         <video id="live" width="320" height="240" autoplay></video>

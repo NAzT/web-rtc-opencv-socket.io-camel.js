@@ -8,7 +8,8 @@
  * Controller of the linkerApp
  */
 angular.module('linkerApp')
-  .controller('CameraCtrl', function ($scope, $socket) {
+  .controller('CameraCtrl', function ($scope, $socket, $rootScope) {
+    $scope.page = "camera.js"
     $scope.project =  { }
     $scope.project['name'] = "Nat's Project"
 
@@ -17,7 +18,16 @@ angular.module('linkerApp')
     })
 
     $scope.processStatus = 'success';
+    
+    $scope.$watch('fps', function(newValue, oldValue) {
+      console.log("...WATCHING FPS....", newValue, oldValue);
+      clearInterval($scope.timer);
+      $scope.timer = setInterval($scope.timer_callback, 1000/newValue);
+    });      
 
+    $scope.$watch('value', function(newValue, oldValue) {
+      console.log("value..", newValue, oldValue);
+    });    
 
     $scope.$on('$viewContentLoaded', function() {
       var video = angular.element('#live')[0];
@@ -28,16 +38,17 @@ angular.module('linkerApp')
 
       $scope['frame'] = 0;
       $scope.fps = 3;
+      $scope.capture_num = 0;
+      $scope.streaming = false;
 
       var flip_obj = {
         success: 'warning',
         warning: 'success'
       }
 
-      $scope.$watch('fps', function(newValue, oldValue) {
-        clearInterval($scope.timer);
-        $scope.timer = setInterval(timer_callback, 1000/newValue);
-      });
+      $scope.change_fps = function() {
+        console.log("HELLO", $scope.fps);
+      }
 
       $socket.on('face_data', function(d) {
         $scope.src_gray = 'data:image/jpeg;base64,'+d.image_gray;
@@ -45,21 +56,26 @@ angular.module('linkerApp')
         $scope.src_face = 'data:image/jpeg;base64,'+d.image_face;
         $scope.src_orig = d.image_orig;
       })
+
+
    
       $scope.process = function() {
         $scope.processStatus = flip_obj[$scope.processStatus];
         console.log('capting..', $scope.processStatus);
       }
 
-      var streaming_callback = function(stream) {
+      $scope.streaming_callback = function(stream) {
         // video.src = webkitURL.createObjectURL(stream);
         video.src = window.URL.createObjectURL(stream); 
-      }
-      var error_callback = function(err) {
-        console.log("Unable to get video stream!")
+        $scope.streaming = true;
       }
 
-      var timer_callback = function() {
+      $scope.error_callback = function(err) {
+        console.log("Unable to get video stream!")
+        $scope.streaming = false;
+      }
+
+      $scope.timer_callback = function() {
         ctx.drawImage(video, 0, 0, 320, 240);
 
         if ($scope.processStatus == 'warning') {
@@ -79,17 +95,20 @@ angular.module('linkerApp')
           }); 
         }
 
-        $scope['frame'] ++;
-        $scope.image_data = canvas.toDataURL('image/jpeg');
-        $socket.emit('frame', $scope.image_data);
+        if ($scope.streaming) {
+          $scope['frame'] ++;
+          $scope.image_data = canvas.toDataURL('image/jpeg');
+          $socket.emit('frame', $scope.image_data);
+        }
         $scope.$apply();
 
       }
       $scope.capture = function() {
         navigator.getMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
-        navigator.getMedia({ video: true, audio: false }, streaming_callback, error_callback);
+        navigator.getMedia({ video: true, audio: false }, $scope.streaming_callback, $scope.  error_callback);
+        $scope.capture_num++;
       }
-      $scope.timer = setInterval(timer_callback, 1000/$scope.fps);
+      $scope.timer = setInterval($scope.timer_callback, 1000/$scope.fps);
 
   });
 });

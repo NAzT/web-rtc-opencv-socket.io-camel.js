@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('linkerApp')
-  .controller('MainCtrl', function ($scope, $socket) {
+  .controller('MainCtrl', function ($scope, $socket, $location) {
+    $scope.page = "main.js"
+
     $scope.project =  { }
     $scope.project['name'] = "Nat's Project"
 
@@ -20,23 +22,18 @@ angular.module('linkerApp')
         $scope.src_hsv = 'data:image/jpeg;base64,'+d.image_hsv;
         $scope.src_face = 'data:image/jpeg;base64,'+d.image_face;
         $scope.src_orig = d.image_orig;
+
         $scope.verb = 'Streaming'
         $scope.has_data = true;
-        console.log("FACE_DATA");
       })
-   
-      $scope.capture = function() {
-        $scope.captureStatus = flip_obj[$scope.captureStatus];
-        console.log('capting..', $scope.captureStatus);
-      }
-
-      var streaming_callback = function(stream) {
-        // video.src = webkitURL.createObjectURL(stream);
-        video.src = window.URL.createObjectURL(stream); 
-      }
-      var error_callback = function(err) {
-        console.log("Unable to get video stream!")
-      }
 
     });
+
+    $scope.getClass = function(path) {
+      if ($location.path().substr(0, path.length) == path) {
+        return "active"
+      } else {
+        return ""
+      }
+    }
   });

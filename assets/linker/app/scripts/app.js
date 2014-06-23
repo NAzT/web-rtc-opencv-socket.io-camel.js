@@ -9,7 +9,7 @@ angular.module('linkerApp', [
 ])
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/', {
+      .when('/home', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
@@ -22,6 +22,6 @@ angular.module('linkerApp', [
         controller: 'CameraCtrl'
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/home'
       });
   });
