@@ -5,6 +5,9 @@ angular.module('linkerApp')
     $scope.project =  { }
     $scope.project['name'] = "Nat's Project"
 
+    $scope.verb = "Waiting"
+    $scope.has_data = false;
+
 	  $socket.on('connectedUsers', function(data) {
 				$scope.connectedUsers = data;
 	  })
@@ -17,6 +20,9 @@ angular.module('linkerApp')
         $scope.src_hsv = 'data:image/jpeg;base64,'+d.image_hsv;
         $scope.src_face = 'data:image/jpeg;base64,'+d.image_face;
         $scope.src_orig = d.image_orig;
+        $scope.verb = 'Streaming'
+        $scope.has_data = true;
+        console.log("FACE_DATA");
       })
    
       $scope.capture = function() {

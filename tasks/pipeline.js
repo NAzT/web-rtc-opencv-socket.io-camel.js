@@ -29,6 +29,8 @@ var cssFilesToInject = [
 // Client-side javascript files to inject in order
 // (uses Grunt-style wildcard/glob/splat expressions)
 var jsFilesToInject = [
+  'linker/bower_components/Bootflat/js/jquery-1.10.1.min.js',
+  'linker/bower_components/bootstrap/dist/js/bootstrap.min.js',
   'js/first-men/**/*.js',
   'linker/bower_components/angular/angular.js',
   'linker/bower_components/angular-resource/angular-resource.js',
@@ -39,8 +41,11 @@ var jsFilesToInject = [
   'linker/bower_components/angular-scenario/angular-scenario.js',
   'linker/bower_components/vintagejs/dist/angular.vintage.js',
   'linker/bower_components/caman/dist/caman.full.js',
-  'linker/bower_components/vintagejs/dist/vintage.js',
-  'linker/bower_components/glfx-bower/glfx.js',
+  'linker/bower_components/Bootflat/bootflat/js/icheck.min.js',
+  'linker/bower_components/Bootflat/bootflat/js/jquery.fs.selecter.min.js',
+  'linker/bower_components/Bootflat/bootflat/js/jquery.fs.stepper.min.js',
+  // 'linker/bower_components/vintagejs/dist/vintage.js',
+  // 'linker/bower_components/glfx-bower/glfx.js',
   // 'linker/bower_components/leaflet-dist/leaflet.js',
   // 'linker/bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js',
   'linker/app/**/*.js',

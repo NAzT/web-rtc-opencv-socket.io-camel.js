@@ -135,18 +135,19 @@ module.exports.sockets = {
     socket.broadcast.emit('connectedUsers', { count: numberOfSockets });
 
     if (session.users) {
-      console.log("CURRENT SESSION", Object.prototype.toString(session.users));
-      var userId = session.users[sails.sockets.id(socket)].id;
+      console.log("CURRENT SESSION", Object.prototype.toString(session && session.users));
+      var users = session.users[sails.sockets.id(socket)]
+      var userId = users && users.id;
       // Get the user instance
       User.findOne(userId).exec(function(err, user) {
-          console.log('destroying user.id', user.id);
+          console.log('destroying user.id', user && user.id);
           // Destroy the user instance
-          User.destroy({id: user.id}).exec(function(){
+          User.destroy({id: user && user.id}).exec(function(){
             console.log("DESTORY CALLBACK", arguments);
           });
 
           // Publish the destroy event to every socket subscribed to this user instance
-          User.publishDestroy(user.id, null, {previous: null});
+          User.publishDestroy(user && user.id || 999, null, {previous: null});
       });
     }
     else {
