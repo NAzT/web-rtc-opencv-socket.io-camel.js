@@ -27,6 +27,8 @@ module.exports = {
           sails.sp.flush(function(err, resp) {
             if (!err) {
               sails.serial_connected = true;
+              sails.sockets.emit('serialConnected', { isConnected: sails.serial_connected });
+              sails.sockets.broadcast('serialConnected', { isConnected: sails.serial_connected });
             }
             res.json({ err: err, resp: resp})
           });
@@ -40,18 +42,30 @@ module.exports = {
 
     close: function(req, res) {
     	if (sails.serial_connected) {
-	    	sails.serialport.close(function(r) {
-	    		console.log(r);
+	    	sails.sp.close( function(err, resp) {
+          console.log("CONTROLLER CLOSE");
+
+          sails.serial_connected = false;
+          sails.sockets.emit('serialConnected', { isConnected: sails.serial_connected });
+          sails.sockets.broadcast('serialConnected', { isConnected: sails.serial_connected });
+
+          res.json({ err: err, isConnected: sails.serial_connected})
+
 	    	})
-    	}
+     	} else {
+        res.json({ err: 'not connected'})      
+      }
+
     },
 
     write: function(req, res) {
       console.log(req.params);
       if (sails.serial_connected) {
-        sails.sp.write('g', function(err, results) {
+        sails.sp.write(req.params.id, function(err, results) {
           console.log('err ' + err);
           console.log('results ' + results);
+
+
           res.json({err: err, results: results})
 
         });

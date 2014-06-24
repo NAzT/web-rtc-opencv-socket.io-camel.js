@@ -19,7 +19,9 @@ module.exports.sockets = {
     var numberOfSockets = Object.keys(socket.namespace.manager.sockets.sockets).length
 
     socket.emit('connectedUsers', { count: numberOfSockets });
-    socket.broadcast.emit('connectedUsers', { count: numberOfSockets });
+    
+    socket.emit('serialConnected', { isConnected: sails.serial_connected });
+    socket.broadcast.emit('serialConnected', { isConnected: sails.serial_connected });
 
 
     console.log("socketId", socketId, "enter");
