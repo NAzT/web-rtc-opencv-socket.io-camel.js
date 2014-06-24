@@ -83,6 +83,7 @@ angular.module('linkerApp')
           }); 
         }
 
+        //emit data to the server
         if ($scope.streaming) {
           $scope['frame'] ++;
           $scope.image_data = canvas.toDataURL('image/jpeg');
@@ -91,11 +92,18 @@ angular.module('linkerApp')
         $scope.$apply();
 
       }
+
       $scope.capture = function() {
-        navigator.getMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
-        navigator.getMedia({ video: true, audio: false }, $scope.streaming_callback, $scope.  error_callback);
+
+        navigator.getMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia ||
+                              navigator.mozGetUserMedia || navigator.msGetUserMedia);
+
+        navigator.getMedia({ video: true, audio: false }, $scope.streaming_callback, $scope.error_callback);
+
         $scope.capture_num++;
+
       }
+
       $scope.timer = setInterval($scope.timer_callback, 1000/$scope.fps);
 
   });

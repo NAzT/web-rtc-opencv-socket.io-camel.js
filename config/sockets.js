@@ -45,7 +45,6 @@ module.exports.sockets = {
       var frame_data = new Buffer(data, 'base64');
 
       var cv = sails.cv;
-      console.log(socketId + " SOCKET.. onFrame config......");
 
       cv.readImage(frame_data, function(err, im) {
         var img_gray = im.copy();
@@ -71,11 +70,11 @@ module.exports.sockets = {
           img_gray.convertGrayscale();
           img_hsv.convertHSVscale();
 
-          socket.emit('face_data', { 
-            image_gray: img_gray.toBuffer().toString('base64'), 
+          socket.emit('face_data', {
+            image_gray: img_gray.toBuffer().toString('base64'),
             image_hsv: img_hsv.toBuffer().toString('base64'),
             image_face: im.toBuffer().toString('base64'),
-            image_orig: orig_base64 
+            image_orig: orig_base64
           })
 
           socket.broadcast.emit('face_data', { 
@@ -85,10 +84,9 @@ module.exports.sockets = {
             image_orig: orig_base64 
           })
 
-          // console.log(im.toBuffer());
-          // console.log(im.toBuffer());
           im2.save('out.jpg')
-        })
+
+        });
       });
     });
 
