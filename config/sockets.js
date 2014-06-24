@@ -33,7 +33,7 @@ module.exports.sockets = {
 
     socket.on('frame', function(data) {
       var orig_base64 = data;
-      console.log(data.length);
+      // console.log(data.length);
       //chrome 2459
       // firefore 2727
       if (!data || data.length < 5000) { 
@@ -145,12 +145,18 @@ module.exports.sockets = {
       console.log("CURRENT SESSION", Object.prototype.toString(session && session.users));
       var users = session.users[sails.sockets.id(socket)]
       var userId = users && users.id;
+      console.log("USER-ID---", userId);
       // Get the user instance
       User.findOne(userId).exec(function(err, user) {
           console.log('destroying user.id', user && user.id);
           // Destroy the user instance
-          User.destroy({id: user && user.id}).exec(function(){
+          User.destroy({id: user && user.id}).exec(function(err, user_data){
             console.log("DESTORY CALLBACK", arguments);
+            if (user_data && user_data[0] && sails.using_camera == user_data[0].socketId) {
+              console.log("release camera");
+              sails.using_camera = false;
+            }
+
           });
 
           // Publish the destroy event to every socket subscribed to this user instance

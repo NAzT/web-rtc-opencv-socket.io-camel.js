@@ -12,7 +12,7 @@
               </p>
               <p ng-show="streaming">Frame: {{frame}}</p>
               <p> 
-                <button type="button" class="btn btn-{{captureStatus}}" ng-click="capture()">Capture</button> 
+                <button ng-hide="is_using" type="button" class="btn btn-{{captureStatus}}" ng-click="capture()">Capture</button>
                 <button ng-show = "capture_num> 0"type="button" class="btn btn-{{processStatus}}" ng-click="process()">Process</button>
               </p>
 

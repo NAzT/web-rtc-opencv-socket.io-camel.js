@@ -41,6 +41,12 @@ angular.module('linkerApp')
         warning: 'success'
       }
 
+      console.log("==========");
+      socket.get('/camera/is_using', function(d) {
+        $scope.is_using = d.result;
+        $scope.$apply();
+      })
+
       $socket.on('face_data', function(d) {
         $scope.src_gray = 'data:image/jpeg;base64,'+d.image_gray;
         $scope.src_hsv = 'data:image/jpeg;base64,'+d.image_hsv;
@@ -50,7 +56,7 @@ angular.module('linkerApp')
    
       $scope.process = function() {
         $scope.processStatus = flip_obj[$scope.processStatus];
-        console.log('capting..', $scope.processStatus);
+        console.log('capturing..', $scope.processStatus);
       }
 
       $scope.streaming_callback = function(stream) {
@@ -80,7 +86,7 @@ angular.module('linkerApp')
             this.gamma(1.8);
             this.vignette("10%", 40);
             this.render(function(r) {});
-          }); 
+          });
         }
 
         //emit data to the server
@@ -102,6 +108,9 @@ angular.module('linkerApp')
 
         $scope.capture_num++;
 
+        socket.get('/camera/use', function(d) {
+          console.log("lockin...", d);
+        })
       }
 
       $scope.timer = setInterval($scope.timer_callback, 1000/$scope.fps);
